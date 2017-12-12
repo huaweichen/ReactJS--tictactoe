@@ -67,3 +67,8 @@ heroku login
 ...
 heroku create tictactoe-huaweichen --buildpack https://github.com/huaweichen/react--tictactoe.git
 ```
+
+1. Setup GRAPHQL_ENDPOINT on Heroku
+```
+heroku config:set GRAPHQL_ENDPOINT=https://api.graph.cool/relay/v1/cjb33awee13d1010240o9knii
+```

@@ -78,3 +78,13 @@ heroku config:set GRAPHQL_ENDPOINT=https://api.graph.cool/relay/v1/cjb33awee13d1
 git push heroku master
 heroku open # check page
 ```
+
+1. Bring more styles.
+```
+yarn add styled-components
+```
+
+1. Utilize Canvas to draw O and X.
+```
+yarn add react-konva konva
+```

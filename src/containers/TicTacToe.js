@@ -59,19 +59,78 @@ class TicTacToe extends Component {
 	/**
 	 * Human makes a move.
 	 */
-	move = (marker, index) => {
-		console.log('move made', marker, index)
+	move = (index, marker) => {
+		this.setState((prevState, prop) => {
+			let {gameState, yourTurn, gameOver, winner} = prevState
+			// change turn
+			yourTurn = !yourTurn
+			// replace index with marker.
+			gameState.splice(index, 1, marker)
+			// check if there is a win
+			let foundWin = this.winChecker(gameState)
+			if (foundWin) {
+				winner = gameState[foundWin[0]]
+			}
+			// find a win or no more square to play, then game over
+			if (foundWin || !gameState.includes(false)) {
+				gameOver = true
+			}
+			// AI start to move
+			if (!gameOver || !yourTurn) {
+				this.makeAiMove(gameState)
+			}
+
+			return {
+				gameState,
+				yourTurn,
+				gameOver,
+				win: foundWin || false,
+				winner
+			}
+		})
 	}
 
-	winChecker = () => {
+	/**
+	 * Generate a random number between a given range.
+	 * @param min
+	 * @param max
+	 * @returns {number}
+	 */
+	random = (min, max) => {
+		min = Math.ceil(min)
+		max = Math.floor(max)
+		return Math.floor(Math.random() * (max-min) + min)
+	}
 
+	/**
+	 * Check whether or not someone win.
+	 */
+	winChecker = (gameState) => {
+		let winCombos = this.winCombos;
+		return winCombos.find((winCombo) => {
+			let [a, b, c] = winCombo
+			return (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c])
+		})
 	}
 
 	/**
 	 * AI makes a move.
 	 */
-	aiMove = () => {
-
+	makeAiMove = (gameState) => {
+		// AI needs to know its mark.
+		let otherMark = this.state.otherMark
+		let openSquares = []
+		// Get the rest of available squares.
+		gameState.forEach((square, index) => {
+			if (!square) {
+				openSquares.push(index)
+			}
+		})
+		let aiMove = openSquares[this.random(0, openSquares.length)]
+		// AI needs think.
+		setTimeout(() => {
+			this.move(aiMove, otherMark)
+		}, 1000)
 	}
 
 	/**
@@ -87,8 +146,6 @@ class TicTacToe extends Component {
 	recordGame = () => {
 
 	}
-
-
 
 	render() {
 		let {

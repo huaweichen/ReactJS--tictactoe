@@ -60,7 +60,7 @@ class TicTacToe extends Component {
 	 * Human makes a move.
 	 */
 	move = (index, marker) => {
-		this.setState((prevState, prop) => {
+		this.setState( (prevState, prop) => {
 			let {gameState, yourTurn, gameOver, winner} = prevState
 			// change turn
 			yourTurn = !yourTurn
@@ -76,7 +76,7 @@ class TicTacToe extends Component {
 				gameOver = true
 			}
 			// AI start to move
-			if (!gameOver || !yourTurn) {
+			if (!gameOver && !yourTurn) {
 				this.makeAiMove(gameState)
 			}
 

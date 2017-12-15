@@ -88,3 +88,13 @@ yarn add styled-components
 ```
 yarn add react-konva konva
 ```
+
+1. Install Auth0 lock plugin for Authentication.
+```
+yarn add auth0-lock
+```
+
+1. 
+```
+yarn add react-relay react-relay-network-layer react-router-relay
+```
